@@ -35,3 +35,30 @@ function printNames(n) {
 }
 
 printNames(names); // original array changed - inpure function
+
+// factory function
+
+// function calculateTax(amount, tax) {
+//   return amount * tax;
+// }
+
+function createTaxCalculator(tax) {
+  function calculateTax(amount) {
+    return amount * tax; // tax variable accessible from 'parent/main' function
+  }
+
+  return calculateTax;
+}
+
+// const vatAmount = calculateTax(100, 0.19);
+// const incomeTax = calculateTax(100, 0.25);
+
+// preconfigured
+const calculateVatAmount = createTaxCalculator(0.19);
+const calculateIncomeTaxAmount = createTaxCalculator(0.25);
+
+// no need every time set the same tax
+console.log(calculateVatAmount(100));
+console.log(calculateVatAmount(200));
+console.log(calculateIncomeTaxAmount(100));
+console.log(calculateIncomeTaxAmount(200));
