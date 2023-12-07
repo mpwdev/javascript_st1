@@ -42,9 +42,12 @@ printNames(names); // original array changed - inpure function
 //   return amount * tax;
 // }
 
+let multiplier = 1.5;
+
 function createTaxCalculator(tax) {
   function calculateTax(amount) {
-    return amount * tax; // tax variable accessible from 'parent/main' function
+    console.log(`multiplier is: ${multiplier}`);
+    return amount * tax * multiplier; // tax variable accessible from 'parent/main' function
   }
 
   return calculateTax;
@@ -57,8 +60,29 @@ function createTaxCalculator(tax) {
 const calculateVatAmount = createTaxCalculator(0.19);
 const calculateIncomeTaxAmount = createTaxCalculator(0.25);
 
+// multiplier = 2;
+
 // no need every time set the same tax
 console.log(calculateVatAmount(100));
 console.log(calculateVatAmount(200));
 console.log(calculateIncomeTaxAmount(100));
 console.log(calculateIncomeTaxAmount(200));
+
+// every function in JS is closure
+// scope and lexical environment
+// -----------------
+// closures samples
+
+let userName = 'Larry';
+
+function greetUser() {
+  // let name = userName;
+  let name = 'Kate';
+  console.log('Hello ' + name);
+}
+
+let name = 'Mary';
+
+userName = 'New Larry2';
+
+greetUser(); // function store 'link' to variable and will use the latest value
