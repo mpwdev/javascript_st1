@@ -100,12 +100,40 @@ greetUser(); // function store 'link' to variable and will use the latest value
 
 function powerOf(x, n) {
   // recursion function example
-  // if (n === 1) {
-  //   return x;
-  // }
-  // return x * powerOf(x, n - 1);
+  if (n === 1) {
+    return x;
+  }
+  return x * powerOf(x, n - 1);
 
-  return n === 1 ? x : x * powerOf(x, n - 1);
+  // return n === 1 ? x : x * powerOf(x, n - 1);
 }
 
 console.log(powerOf(2, 3)); // 2 * 2 * 2
+
+const myself = {
+  name: 'Bob',
+  friends: [
+    {
+      name: 'Robin',
+      friends: [{ name: 'Jon', friends: [{ name: 'Lola' }, { name: 'Tony' }] }],
+    },
+    { name: 'Kate' },
+  ],
+};
+
+function getFriendNames(person) {
+  const collectedNames = [];
+
+  if (!person.friends) {
+    return [];
+  }
+
+  for (const friend of person.friends) {
+    collectedNames.push(friend.name);
+    collectedNames.push(...getFriendNames(friend));
+  }
+
+  return collectedNames;
+}
+
+console.log(getFriendNames(myself));
