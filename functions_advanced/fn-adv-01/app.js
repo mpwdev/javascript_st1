@@ -86,3 +86,26 @@ let name = 'Mary';
 userName = 'New Larry2';
 
 greetUser(); // function store 'link' to variable and will use the latest value
+
+// function powerOf(x, n) {
+// 	let result = 1;
+
+// 	for(let i = 0; i < n; i++) {
+// 		// result = result * x;
+// 		result *= x;
+// 	}
+
+// 	return result;
+// }
+
+function powerOf(x, n) {
+  // recursion function example
+  // if (n === 1) {
+  //   return x;
+  // }
+  // return x * powerOf(x, n - 1);
+
+  return n === 1 ? x : x * powerOf(x, n - 1);
+}
+
+console.log(powerOf(2, 3)); // 2 * 2 * 2
