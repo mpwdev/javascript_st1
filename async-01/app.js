@@ -7,7 +7,9 @@ const getPosition = (options) => {
       (success) => {
         resolve(success);
       },
-      (error) => {},
+      (error) => {
+        reject(error);
+      },
       options
     );
   });
@@ -44,8 +46,20 @@ function trackUserHandler() {
       positionData = posData;
       return setTimer(2000);
     })
+    .catch((err) => {
+      // console.log(`error is: ${err}`);
+      console.log(err);
+      return 'getpositions failed, going to next step...';
+    })
     .then((data) => {
       console.log(data, positionData);
+    })
+    .finally(() => {
+      // the promise is settled now - finally() will NOT return a new promise!
+      // you can do final cleanup work here
+      console.log(
+        '--- promise is settled now - final mode: SETTLED - final cleanup ---'
+      );
     });
 
   // setTimeout(() => {
