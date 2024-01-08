@@ -25,7 +25,7 @@ const setTimer = (duration) => {
   return promise;
 };
 
-function trackUserHandler() {
+async function trackUserHandler() {
   // console.log('Clicked!');
   // navigator.geolocation.getCurrentPosition(
   //   (posData) => {
@@ -40,36 +40,38 @@ function trackUserHandler() {
   //     console.log(errData);
   //   }
   // );
-  let positionData;
-  getPosition()
-    .then((posData) => {
-      positionData = posData;
-      return setTimer(2000);
-    })
-    .catch((err) => {
-      // console.log(`error is: ${err}`);
-      console.log(err);
-      return 'getpositions failed, going to next step...';
-    })
-    .then((data) => {
-      console.log(data, positionData);
-    })
-    .finally(() => {
-      // the promise is settled now - finally() will NOT return a new promise!
-      // you can do final cleanup work here
-      console.log(
-        '--- promise is settled now - final mode: SETTLED - final cleanup ---'
-      );
-    });
+  // let positionData;
+  const positionData = await getPosition();
+  const timerData = await setTimer(2000);
+  console.log(timerData, positionData);
+  // .then((posData) => {
+  //   positionData = posData;
+  //   return setTimer(2000);
+  // })
+  // .catch((err) => {
+  //   // console.log(`error is: ${err}`);
+  //   console.log(err);
+  //   return 'getpositions failed, going to next step...';
+  // })
+  // .then((data) => {
+  //   console.log(data, positionData);
+  // });
+  // .finally(() => {
+  //   // the promise is settled now - finally() will NOT return a new promise!
+  //   // you can do final cleanup work here
+  //   console.log(
+  //     '--- promise is settled now - final mode: SETTLED - final cleanup ---'
+  //   );
+  // });
 
   // setTimeout(() => {
   //   console.log('Timer done! /zero timout/');
   // }, 0);
-  setTimer(1000).then(() => {
-    console.log('Timer done! /timeout 1000/');
-  });
+  // setTimer(1000).then(() => {
+  //   console.log('Timer done! /timeout 1000/');
+  // });
 
-  console.log('Getting position.../out of navigator/');
+  // console.log('Getting position.../out of navigator/');
 }
 
 button.addEventListener('click', trackUserHandler);
