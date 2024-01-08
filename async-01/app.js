@@ -41,8 +41,16 @@ async function trackUserHandler() {
   //   }
   // );
   // let positionData;
-  const positionData = await getPosition();
-  const timerData = await setTimer(2000);
+  let positionData;
+  let timerData;
+  try {
+    positionData = await getPosition();
+    timerData = await setTimer(2000);
+  } catch (error) {
+    console.log(error);
+  }
+  // const positionData = await getPosition();
+  // const timerData = await setTimer(2000);
   console.log(timerData, positionData);
   // .then((posData) => {
   //   positionData = posData;
