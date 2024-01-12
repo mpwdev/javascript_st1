@@ -43,6 +43,7 @@ function sendHttpRequest(method, url, data) {
 
 async function fetchPosts() {
   try {
+    // temporary incorrect url to get status code error
     const responseData = await sendHttpRequest(
       'GET',
       'https://jsonplaceholder.typicode.com/pos'
