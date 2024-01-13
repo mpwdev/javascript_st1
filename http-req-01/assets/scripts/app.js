@@ -46,9 +46,21 @@ function sendHttpRequest(method, url, data) {
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then((response) => {
-    return response.json();
-  });
+  })
+    .then((response) => {
+      if (response.status >= 200 && response.status < 300) {
+        return response.json();
+      } else {
+        return response.json().then((errData) => {
+          console.log(error);
+          throw new Error('Something went wrong - server-side');
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      throw new Error('Something went wrong - network-side');
+    });
 }
 
 async function fetchPosts() {
