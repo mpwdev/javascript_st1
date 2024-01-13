@@ -40,9 +40,11 @@ function sendHttpRequest(method, url, data) {
 
   // return promise;
 
-  return fetch(url).then((response) => {
-    return response.json();
-  });
+  return fetch(url, { method: method, body: JSON.stringify(data) }).then(
+    (response) => {
+      return response.json();
+    }
+  );
 }
 
 async function fetchPosts() {
