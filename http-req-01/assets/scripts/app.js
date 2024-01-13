@@ -8,44 +8,49 @@ const fetchButton = document.querySelector('#available-posts button');
 const postList = document.querySelector('ul');
 
 function sendHttpRequest(method, url, data) {
-  const promise = new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
+  // const promise = new Promise((resolve, reject) => {
+  // const xhr = new XMLHttpRequest();
 
-    xhr.open(method, url);
+  // xhr.open(method, url);
 
-    xhr.responseType = 'json';
+  // xhr.responseType = 'json';
 
-    // status code errors (non success errors)
-    xhr.onload = function () {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        resolve(xhr.response);
-      } else {
-        reject(
-          new Error('custom message - Something went wrong with HttpRequest')
-        );
-      }
+  // // status code errors (non success errors)
+  // xhr.onload = function () {
+  //   if (xhr.status >= 200 && xhr.status < 300) {
+  //     resolve(xhr.response);
+  //   } else {
+  //     reject(
+  //       new Error('custom message - Something went wrong with HttpRequest')
+  //     );
+  //   }
 
-      // const listOfPosts = JSON.parse(xhr.response);
-    };
+  //   // const listOfPosts = JSON.parse(xhr.response);
+  // };
 
-    // network errors
-    xhr.onerror = function () {
-      reject(
-        new Error('custom message - Failed to send request with HttpRequest')
-      );
-    };
+  // // network errors
+  // xhr.onerror = function () {
+  //   reject(
+  //     new Error('custom message - Failed to send request with HttpRequest')
+  //   );
+  // };
 
-    xhr.send(JSON.stringify(data));
+  // xhr.send(JSON.stringify(data));
+  // });
+
+  // return promise;
+
+  return fetch(url).then((response) => {
+    return response.json();
   });
-
-  return promise;
 }
 
 async function fetchPosts() {
   try {
+    // temporary incorrect url to get status code error
     const responseData = await sendHttpRequest(
       'GET',
-      'https://jsonplaceholder.typicode.com/pos'
+      'https://jsonplaceholder.typicode.com/posts'
     );
     const listOfPosts = responseData;
     for (const post of listOfPosts) {
