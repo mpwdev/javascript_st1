@@ -1,5 +1,8 @@
 import { ProjectItem } from './ProjectItem.js';
+// create alias for this file only
+// import { ProjectItem as NewNameItem } from './ProjectItem.js';
 import { DOMHelper } from '../Utility/DOMHelper.js';
+// import * as DOMH from '../Utility/DOMHelper.js';
 
 export class ProjectList {
   projects = [];
