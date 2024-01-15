@@ -1,4 +1,7 @@
 import { ProjectList } from './App/ProjectList.js';
+// sample import libs like lodash from node_modules
+import * as _ from 'lodash/array';
+console.log(_.difference([1, 2], [2, 3]));
 
 // eslint-disable-next-line no-undef
 globalThis.DEFAULT_VALUE = 'MAX';
