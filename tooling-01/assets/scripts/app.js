@@ -1,5 +1,6 @@
 import { ProjectList } from './App/ProjectList.js';
 
+// eslint-disable-next-line no-undef
 globalThis.DEFAULT_VALUE = 'MAX';
 
 class App {
