@@ -1,0 +1,1 @@
+(()=>{const e=document.querySelector("button"),t=document.querySelector("p");e.addEventListener("click",(()=>{const e=t.textContent;navigator.clipboard?navigator.clipboard.writeText(e).then((e=>{console.log(e)})).catch((e=>{console.log(e)})):alert("This feature not available, please copy manually")}))})();
