@@ -1,20 +1,62 @@
 const storeBtn = document.getElementById('store-btn');
 const retrBtn = document.getElementById('retrieve-btn');
 
+// idb lib
+// https://github.com/jakearchibald/idb
+
+let db;
+
+const dbRequest = indexedDB.open('StorageDummy', 1);
+
+dbRequest.onsuccess = function (event) {
+  db = event.target.result;
+};
+
+dbRequest.onupgradeneeded = function (event) {
+  db = event.target.result;
+
+  const objStore = db.createObjectStore('products', { keyPath: 'id' });
+
+  objStore.transaction.oncomplete = function (event) {
+    const productsStore = db
+      .transaction('products', 'readwrite')
+      .objectStore('products');
+    productsStore.add({
+      id: 'p1',
+      title: 'A first product',
+      price: 14.99,
+      tags: ['Expensive', 'Luxury'],
+    });
+  };
+};
+
+dbRequest.onerror = function (event) {
+  console.log('Error ...');
+};
+
 storeBtn.addEventListener('click', () => {
-  const userId = 'u123';
-  const user = { name: 'Bob', age: 33 };
-  // document.cookie = `uid=${userId}; max-age=2`; // in seconds
-  document.cookie = `uid=${userId}; max-age=360`;
-  document.cookie = `user=${JSON.stringify(user)}`;
+  if (!db) {
+    return;
+  }
+
+  const productsStore = db
+    .transaction('products', 'readwrite')
+    .objectStore('products');
+  productsStore.add({
+    id: 'p2',
+    title: 'A second product',
+    price: 19.99,
+    tags: ['Expensive', 'Luxury'],
+  });
 });
 
 retrBtn.addEventListener('click', () => {
-  console.log(document.cookie);
-  const cookieData = document.cookie.split(';');
-  const data = cookieData.map((i) => {
-    return i.trim();
-  });
-  console.log(data);
-  console.log(data[1].split('=')[1]); // user value
+  const productsStore = db
+    .transaction('products', 'readwrite')
+    .objectStore('products');
+  const request = productsStore.get('p2');
+
+  request.onsuccess = function () {
+    console.log(request.result);
+  };
 });
