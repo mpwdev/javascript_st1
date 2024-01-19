@@ -1,17 +1,28 @@
-// library land
-const uid = Symbol('uids');
-console.log(uid);
-
-const user = {
-  // id: 'p1',
-  [uid]: 'p1',
-  name: 'Bob',
-  age: 30,
+const company = {
+  curEmployee: 0,
+  employees: ['Bob', 'Dan', 'Kate'],
+  next() {
+    if (this.curEmployee >= this.employees.length) {
+      return { value: this.curEmployee, done: true };
+    }
+    const returnValue = {
+      value: this.employees[this.curEmployee],
+      done: false,
+    };
+    this.curEmployee++;
+    return returnValue;
+  },
 };
 
-// app land => using the library above
+// console.log(company.next());
+// console.log(company.next());
+// console.log(company.next());
+// console.log(company.next());
+// console.log(company.next());
 
-user.id = 'p2'; // this should not be possible
+let employee = company.next();
 
-console.log(user);
-console.log(user[uid]);
+while (!employee.done) {
+  console.log(employee.value);
+  employee = company.next();
+}
