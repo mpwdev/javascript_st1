@@ -22,6 +22,7 @@ const company = {
 
 let employee = company.next();
 
+// we can create own looping logic
 while (!employee.done) {
   console.log(employee.value);
   employee = company.next();
