@@ -1,20 +1,24 @@
 // import { renderProducts, updateProducts } from './rendering';
 import { updateProducts } from './rendering';
-import { products as prods } from './products';
+// import { products as prods } from './products';
+import { products } from './products';
 
-let products = prods;
+// let products = prods;
 
 export function deleteProduct(prodId) {
-  const updatedProducts = [];
-  let deletedProduct;
-  for (const prod of products) {
-    if (prod.id !== prodId) {
-      updatedProducts.push(prod);
-    } else {
-      deletedProduct = prod;
-    }
-  }
-  products = updatedProducts;
+  // const updatedProducts = [];
+  // let deletedProduct;
+  // for (const prod of products) {
+  //   if (prod.id !== prodId) {
+  //     updatedProducts.push(prod);
+  //   } else {
+  //     deletedProduct = prod;
+  //   }
+  // }
+  // products = updatedProducts;
+  const deletedProductIndex = products.findIndex((prod) => prod.id === prodId);
+  const deletedProduct = products[deletedProductIndex];
+  products.splice(deletedProductIndex, 1);
   // renderProducts(products, deleteProduct);
   updateProducts(deletedProduct, prodId, deleteProduct, false);
 }
