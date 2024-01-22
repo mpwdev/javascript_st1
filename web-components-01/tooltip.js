@@ -1,8 +1,9 @@
 class Tooltip extends HTMLElement {
   constructor() {
     super();
-    this._tooltipContainer;
+    // this._tooltipContainer;
     this.tooltipIcon;
+    this._tooltipVisible = false;
     this._tooltipText = 'Some dummy tooltip text';
     this.attachShadow({ mode: 'open' });
     // const template = document.getElementById('tooltip-template');
@@ -26,6 +27,7 @@ class Tooltip extends HTMLElement {
 		:host(.important) {
 			background-color: var(--color-primary, #ccc);
 			padding: 0.15rem;
+			position: relative;
 		}
 
 		:host-context(p) {
@@ -66,7 +68,8 @@ class Tooltip extends HTMLElement {
       this._hideTooltip.bind(this)
     );
     // this.shadowRoot.appendChild(tooltipIcon);
-    this.style.position = 'relative';
+    // this.style.position = 'relative';
+    this._render();
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -89,18 +92,35 @@ class Tooltip extends HTMLElement {
     this.tooltipIcon.removeEventListener('mouseleave', this._hideTooltip);
   }
 
+  _render() {
+    let tooltipContainer = this.shadowRoot.querySelector('div');
+    if (this._tooltipVisible) {
+      tooltipContainer = document.createElement('div');
+      tooltipContainer.textContent = this._tooltipText;
+      this.shadowRoot.appendChild(tooltipContainer);
+    } else {
+      if (tooltipContainer) {
+        this.shadowRoot.removeChild(tooltipContainer);
+      }
+    }
+  }
+
   _showTooltip() {
-    this._tooltipContainer = document.createElement('div');
-    this._tooltipContainer.textContent = this._tooltipText;
-    // this._tooltipContainer.style.background = 'black';
-    // this._tooltipContainer.style.color = 'white';
-    // this._tooltipContainer.style.position = 'absolute';
-    // this._tooltipContainer.style.zIndex = '10';
-    this.shadowRoot.appendChild(this._tooltipContainer);
+    // this._tooltipContainer = document.createElement('div');
+    // this._tooltipContainer.textContent = this._tooltipText;
+    // // this._tooltipContainer.style.background = 'black';
+    // // this._tooltipContainer.style.color = 'white';
+    // // this._tooltipContainer.style.position = 'absolute';
+    // // this._tooltipContainer.style.zIndex = '10';
+    // this.shadowRoot.appendChild(this._tooltipContainer);
+    this._tooltipVisible = true;
+    this._render();
   }
 
   _hideTooltip() {
-    this.shadowRoot.removeChild(this._tooltipContainer);
+    // this.shadowRoot.removeChild(this._tooltipContainer);
+    this._tooltipVisible = false;
+    this._render();
   }
 }
 
