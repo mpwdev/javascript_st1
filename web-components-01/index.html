@@ -11,13 +11,13 @@
 
 <body>
 	<template id="tooltip-template">
-		<span> (?)</span>
+		<slot>Some default slot text</slot><span> (?)</span>
 	</template>
 
 	<p><mp-tooltip text="Web component example text">Web Components</mp-tooltip> are awesome</p>
 
 	<p>
-		<mp-tooltip>Web Component simple default</mp-tooltip>
+		<mp-tooltip></mp-tooltip>
 	</p>
 
 </body>
