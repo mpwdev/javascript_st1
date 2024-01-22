@@ -6,20 +6,35 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Web Components</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		:root {
+			--color-primary: lightseagreen;
+			font-family: sans-serif;
+		}
+
+		mp-tooltip {
+			border: 1px solid tomato;
+			padding: 0.15rem;
+		}
+	</style>
 	<script src="tooltip.js"></script>
 	<script src="confirm-link.js"></script>
 </head>
 
 <body>
 
-	<p><mp-tooltip text="Web component example text">Web Components</mp-tooltip> are awesome</p>
+	<p><mp-tooltip class="important" text="Web component example text">
+			<span class="highlight">Web Components</span>
+		</mp-tooltip> are awesome</p>
 
-	<p>
-		<mp-tooltip></mp-tooltip>
-	</p>
+	<mp-tooltip></mp-tooltip>
 
-	<a href="https://www.mpwdev.com">MPwdev developer</a>
 	<br><br>
+
 	<a is="mp-confirm-link" href="https://www.mpwdev.com">MPwdev developer confirm link web component</a>
 
 </body>
